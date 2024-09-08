@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${PG_HOST:localhost:5432}/task_system_db
+    username: ${PG_USER:user}
+    password: ${PG_PASSWORD:password}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    show-sql: true
+    open-in-view: true
+    hibernate:
+      ddl-auto: ${HIBERNATE_DDL_AUTO:validate}
+
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+    enabled: true
+    drop-first: false
+
+jwt:
+  secret: ${JWT_SECRET}
+  lifetime: 3600000
+
+allowed-origins: ${CORS:http://localhost:8080}
+
+matchers: ${MATCHERS:/api/auth/login,/api/auth/register}
